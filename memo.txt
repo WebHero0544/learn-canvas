@@ -1,0 +1,6 @@
+参考地址：
+
+http://www.runoob.com/html/html5-canvas.html   ------ HTML5 Canvas 教程
+
+
+http://www.runoob.com/tags/ref-canvas.html  ------  HTML5 <canvas> 参考手册
