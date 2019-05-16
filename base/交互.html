@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #canvas {
+            border: 1px solid #000;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="600" height="300"></canvas>
+    <script>
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+        console.log(ctx);
+        
+        drawArc(ctx, canvas);
+        drawRect(ctx, canvas);
+
+
+        canvas.addEventListener('mousemove', function(e) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // console.log(e);
+            var point = {x: e.offsetX, y: e.offsetY};
+            drawArc(ctx, canvas, point);
+            drawRect(ctx, canvas, point);
+        })
+
+
+        
+        function drawArc(ctx, canvas, point) {
+            ctx.beginPath();
+            ctx.arc(300, 150, 20, 0, Math.PI * 2, true);
+            if (point && ctx.isPointInPath(point.x, point.y)) {
+                ctx.fillStyle = 'red';
+                canvas.style.cursor = 'pointer';
+            }else {
+                ctx.fillStyle = 'pink';
+                canvas.style.cursor = '';
+            }
+            ctx.fill();
+        }
+
+        // fillRect和storeRect不是path,可以用rect代替
+        function drawRect(ctx, canvas, point) {
+            ctx.beginPath();
+            ctx.rect(250, 100, 100, 100);
+            // ctx.rect(260, 110,80, 80);
+            ctx.lineWidth = 10;
+            if (point && ctx.isPointInStroke(point.x, point.y)) {
+                ctx.strokeStyle = 'red';
+                canvas.style.cursor = 'pointer';
+            }else {
+                ctx.strokeStyle = 'pink';
+                canvas.style.cursor = '';
+            }
+            ctx.stroke();
+        }
+
+
+
+    </script>
+</body>
+
+</html>
